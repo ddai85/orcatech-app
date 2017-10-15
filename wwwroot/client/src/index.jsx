@@ -15,12 +15,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('whatip');
     $.ajax({
-      url: '/server/items/read.php',
+      url: '/items',
       method: 'GET',
+      contentType : 'application/json',
       success: (data) => {
-        this.setState({items: data})
-        console.log(this.state.items)
+        console.log('is this firing', data)
+        //this.setState({items: JSON.parse(data)})
+        //console.log(this.state.items)
       },
       error: (err) => {
         console.log(err);
@@ -31,16 +34,16 @@ class App extends React.Component {
   handleClick() {
 
     let data = {
-      name: 'Dans Computer',
-      model: 'Macbook Pro',
-      mac_address: '01010101'
+      "name": "Dans Computer",
+      "model": "Macbook Pro",
+      "mac_address": "01010101"
     };
 
     $.ajax({
-      url: '/server/items/create.php',
+      url: '/items',
       method: 'POST',
       contentType : 'application/json',
-      data: data,
+      data: JSON.stringify(data),
       success: (data) => {
         console.log(data)
       },
