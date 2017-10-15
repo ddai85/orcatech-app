@@ -10,17 +10,39 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      items: []
     };
   }
 
-  ComponentDidMount() {
+  componentDidMount() {
     $.ajax({
-      url: '/items/read.php'),
+      url: '/server/items/read.php',
       method: 'GET',
       success: (data) => {
-        console.log(data);
-        this.reloadData();
+        this.setState({items: data})
+        console.log(this.state.items)
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  
+  handleClick() {
+
+    let data = {
+      name: 'Dans Computer',
+      model: 'Macbook Pro',
+      mac_address: '01010101'
+    };
+
+    $.ajax({
+      url: '/server/items/create.php',
+      method: 'POST',
+      contentType : 'application/json',
+      data: data,
+      success: (data) => {
+        console.log(data)
       },
       error: (err) => {
         console.log(err);
@@ -28,12 +50,12 @@ class App extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div>
         <Banner/>
         <List/>
+        <button onClick={this.handleClick}>Click to submit</button>
       </div>
     );
   }

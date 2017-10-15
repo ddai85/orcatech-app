@@ -1,5 +1,4 @@
-#Options -MultiViews
 #RewriteEngine On
+#RewriteBase /api/
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^ index.php [QSA,L]
-#Redirect /index.html /client/dist/index.html

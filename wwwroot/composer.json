@@ -3,5 +3,8 @@
         "psr-4": {
             "App\\": "server/"
         }
+    },
+    "require": {
+        "slim/slim": "^3.0"
     }
 }
