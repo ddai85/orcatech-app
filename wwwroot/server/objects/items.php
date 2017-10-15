@@ -1,4 +1,6 @@
 <?php
+namespace App;
+
 class Items{
  
     // database connection and table name
@@ -13,16 +15,19 @@ class Items{
  
     // constructor with $db as database connection
     public function __construct($db){
+
         $this->myDB = $db;
     }
 
     // read items
   function read(){
 
-    $stmt = $this->myDB->prepare('SELECT * FROM items;');
+    //$stmt = $this->myDB->query('SELECT * FROM items');
  
-    $stmt->execute();
- 
+    //$stmt->execute();
+
+    $stmt = $this->myDB->query('SELECT * FROM items');
+
         // for storing tasks
     return $stmt;
 

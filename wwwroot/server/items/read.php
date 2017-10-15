@@ -4,50 +4,52 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
-include_once '../config/database.php';
-include_once '../objects/items.php';
  
-$db = $myDB;
+require '../../vendor/autoload.php';
+
+use App\SQLiteConnection;
+use App\Items;
+
+
+ 
+$pdo = (new SQLiteConnection())->connect();
+if ($pdo != null){
+  // echo json_encode(
+  //   array('message' => 'Connected to the SQLite database successfully!')
+  // );
+}
+else {
+  echo json_encode(
+    array('message' => 'Whoops, could not connect to the SQLite database!')
+  );
+}
  
 // initialize object
-$item = new Items($db);
- 
+$item = new Items($pdo);
+
 // query items
 $stmt = $item->read();
-$num = $stmt->rowCount();
+
+// items array
+$items_arr=array();
+$items_arr["records"]=array();
  
-// check if more than 0 record found
-if($num>0){
- 
-    // items array
-    $items_arr=array();
-    $items_arr["records"]=array();
- 
-    // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
-        extract($row);
- 
-        $items_item=array(
-            "id" => $id,
-            "name" => $name,
-            "model" => $model,
-            "mac_address" => $mac_address
-        );
- 
-        array_push($items_arr["records"], $items_item);
-    }
- 
-    echo json_encode($items_arr);
+// retrieve our table contents
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+  // extract row
+  // this will make $row['name'] to
+  // just $name only
+  extract($row);
+
+  $items_item=array(
+    "id" => $id,
+    "name" => $name,
+    "model" => $model,
+    "mac_address" => $mac_address
+  );
+  array_push($items_arr["records"], $items_item);
 }
  
-else{
-    echo json_encode(
-        array("message" => "No items found.")
-    );
-}
+echo json_encode($items_arr);
+
 ?>
