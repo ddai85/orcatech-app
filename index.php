@@ -19,10 +19,8 @@ $db = $database->getConnection();
 
 // Render PHP template in route
 $app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.html', [
-        'name' => $args['name']
-    ]);
-})->setName('index');
+    return $this->renderer->render($response, "/index.html", $args);
+});
 
 function getTitleFromUrl($url)
 {
