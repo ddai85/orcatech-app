@@ -1,8 +1,16 @@
-CREATE TABLE IF NOT EXISTS items (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  model TEXT NOT NULL,
-  mac_address TEXT NOT NULL
+DROP DATABASE IF EXISTS orcatech;
+
+CREATE DATABASE orcatech;
+
+USE orcatech;
+
+
+CREATE TABLE items (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  model VARCHAR(50) NOT NULL,
+  mac_address VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 INSERT INTO items (name, model, mac_address) VALUES ('Annes Computer', 'Macbook Pro', 'ABC1234');

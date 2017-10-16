@@ -2,12 +2,12 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer;
-
+include_once './database/config.php';
 require './vendor/autoload.php';
 
 $app = new \Slim\App;
-$db = new PDO('sqlite:./database/api_db.db');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$database = new Database();
+$db = $database->getConnection();
 
 function getTitleFromUrl($url)
 {
