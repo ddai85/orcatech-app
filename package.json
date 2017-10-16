@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "heroku-postbuild": "webpack -p --config webpack.prod.js"
+    "heroku-postbuild": "webpack -p --config webpack.config.js"
   },
   "author": "Dan Dai",
   "license": "ISC",
