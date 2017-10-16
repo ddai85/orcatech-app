@@ -12,15 +12,21 @@ class List extends React.Component {
     };
   }
 
-
   render() {
     return (
       <div>
-        <p>I am a List</p>
-        <ListEntry/>
-        <ListEntry/>
-        <ListEntry/>
-        <ListEntry/>
+        <table>
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Model</th>
+              <th>MAC Address</th>
+              <th></th>
+            </tr>
+            { this.props.items.map(item => <ListEntry key={item.id} item={item} delete={this.props.delete}/>) }
+          </tbody>
+        </table>
       </div>
     );
   }

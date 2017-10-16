@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Banner from './components/Banner.jsx';
 import List from './components/List.jsx';
+import AddItem from './components/AddItem.jsx';
 
 
 
@@ -12,18 +13,22 @@ class App extends React.Component {
     this.state = {
       items: []
     };
+    
+    this.insertData = this.insertData.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
-    console.log('whatip');
+    this.getData();
+  }
+
+  getData() {
     $.ajax({
       url: '/items',
       method: 'GET',
       contentType : 'application/json',
       success: (data) => {
-        console.log('is this firing', data)
-        //this.setState({items: JSON.parse(data)})
-        //console.log(this.state.items)
+        this.setState({items: JSON.parse(data)})
       },
       error: (err) => {
         console.log(err);
@@ -31,21 +36,29 @@ class App extends React.Component {
     });
   }
   
-  handleClick() {
-
-    let data = {
-      "name": "Dans Computer",
-      "model": "Macbook Pro",
-      "mac_address": "01010101"
-    };
-
+  insertData(data) {
+    console.log('i got pinged back', data)
     $.ajax({
       url: '/items',
       method: 'POST',
       contentType : 'application/json',
       data: JSON.stringify(data),
       success: (data) => {
-        console.log(data)
+        this.getData();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  delete(deleteId) {
+    $.ajax({
+      url: '/items?' + deleteId,
+      method: 'GET',
+      contentType : 'application/json',
+      success: (data) => {
+        this.getData();
       },
       error: (err) => {
         console.log(err);
@@ -57,8 +70,8 @@ class App extends React.Component {
     return (
       <div>
         <Banner/>
-        <List/>
-        <button onClick={this.handleClick}>Click to submit</button>
+        <AddItem insertData={this.insertData}/>
+        <List items={this.state.items} delete={this.delete}/>
       </div>
     );
   }

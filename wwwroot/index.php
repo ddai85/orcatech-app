@@ -24,11 +24,27 @@ function returnResult($action, $success = true, $id = 0)
     ]);
 }
 
+//return all items in database-- if a queryId is passed, search for Id and delete
+$app->get('/items', function (Request $req, Response $res) use ($db, $app) {
+    $query = $req->getUri()->getQuery();
 
-$app->get('/items', function () use ($db, $app) {
-    $sth = $db->query('SELECT * FROM items;');
-    echo json_encode($sth->fetchAll(PDO::FETCH_CLASS));
+    if (!$query){
+      $stmt = $db->query('SELECT * FROM items;');
+      echo json_encode($stmt->fetchAll(PDO::FETCH_CLASS));
+    } else {
+    	$sql = 'DELETE FROM items ' . 'WHERE id =:id';
+    	$stmt = $db->prepare($sql);
+    	$stmt->bindValue(':id', $query);
+    	if ($stmt->execute()) {
+        returnResult('Delete', true, $query);
+      } else {
+      	returnResult('Delete', false, $query);
+      }
+  
+    }
 });
+
+
 
 $app->post('/items', function (Request $req, Response $res) use ($db, $app) {
 	  $parsedBody = json_decode($req->getBody(), true);
