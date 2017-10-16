@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('test')
     this.getData();
   }
 
@@ -41,8 +40,7 @@ class App extends React.Component {
       },
       contentType : 'application/json',
       success: (data) => {
-        console.log(data)
-//        this.setState({items: JSON.parse(data)})
+        this.setState({items: JSON.parse(data)})
       },
       error: (err) => {
         console.log(err);

@@ -3,7 +3,6 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer;
 include_once './database/config.php';
-include_once './database/dummydata.sql';
 require './vendor/autoload.php';
 
 $app = new \Slim\App;
@@ -72,17 +71,6 @@ $app->get('/items', function (Request $req, Response $res) use ($db, $app) {
       }
   
     }
-});
-
-$app->get('/dummydata', function (Request $req, Response $res) use ($db, $app) {
-  $query = file_get_contents("dummydata.sql");
-  $stmt = $db->prepare($query);
-
-  if ($stmt->execute()){
-     echo "Success";
-  }else{ 
-     echo "Fail";
-  }
 });
 
 

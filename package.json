@@ -4,7 +4,8 @@
   "description": "A quick app made for ORCATECH job application",
   "main": "",
   "scripts": {
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "heroku-postbuild": "webpack -p --config webpack.prod.js"
   },
   "author": "Dan Dai",
   "license": "ISC",
