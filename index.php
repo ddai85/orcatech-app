@@ -10,9 +10,7 @@ $app = new \Slim\App;
 $container = $app->getContainer();
 
 // Register component on container
-$container['view'] = function ($container) {
-    return new \Slim\Views\PhpRenderer('/');
-};
+$container['renderer'] = new PhpRenderer("/");
 
 $database = new Database();
 $db = $database->getConnection();
