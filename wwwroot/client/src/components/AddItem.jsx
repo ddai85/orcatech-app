@@ -43,11 +43,13 @@ class AddItem extends React.Component {
     return (
       <div className="section">
         <div className="row">
-          <input className="col s2 additem" value={this.state.name} type="text" onChange={e => this.handleChange(e, 'name')} placeholder="Name"/>
-          <input className="col s2 offset-s1 additem" value={this.state.model} type="text" onChange={e => this.handleChange(e, 'model')} placeholder="Model"/>
-          <input className="col s2 offset-s1 additem" value={this.state.mac_address} type="text" onChange={e => this.handleChange(e, 'mac_address')} placeholder="MAC Address"/>
           <button className="col s1 offset-s1 additem waves-effect waves-light btn" onClick={this.handleClick}>Submit</button>
-          <div className="col s1 offset-s1">
+          <div className="col s5 offset-s1">
+          <input value={this.state.name} type="text" onChange={e => this.handleChange(e, 'name')} placeholder="Name"/>
+          <input value={this.state.model} type="text" onChange={e => this.handleChange(e, 'model')} placeholder="Model"/>
+          <input value={this.state.mac_address} type="text" onChange={e => this.handleChange(e, 'mac_address')} placeholder="MAC Address"/>
+          </div>
+          <div className="col offset-s1 s1">
             <label>Order By</label>
             <form action="#">
               <p>

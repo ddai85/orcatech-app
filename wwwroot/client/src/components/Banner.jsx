@@ -6,9 +6,14 @@ import $ from 'jquery';
 const Banner = (props) =>{
 
   return (
-    <div className="header-cont">
-      <div className="header">
-        <h3 className="z-depth-1 header">ORCATECH Equipment App</h3>
+    <div className="row">
+      <div className="col s12">
+        <div className="card-panel teal small white-text">
+          <div className="card-content">
+	          <h3>ORCATECH Equipment App</h3>
+	          <h6>Created by Daniel Dai</h6>
+          </div>
+        </div>
       </div>
     </div>
   );
