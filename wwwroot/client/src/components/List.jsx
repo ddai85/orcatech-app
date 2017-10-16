@@ -15,7 +15,7 @@ class List extends React.Component {
   render() {
     return (
       <div>
-        <table>
+        <table className="striped">
           <tbody>
             <tr>
               <th>ID</th>

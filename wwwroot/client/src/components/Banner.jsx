@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 
-
 const Banner = (props) =>{
 
   return (
-    <div>
-      <p>I am a Banner</p>
+    <div className="header-cont">
+      <div className="header">
+        <h3 className="z-depth-1 header">ORCATECH Equipment App</h3>
+      </div>
     </div>
   );
 };

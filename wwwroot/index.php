@@ -24,21 +24,39 @@ function returnResult($action, $success = true, $id = 0)
     ]);
 }
 
-//return all items in database-- if a queryId is passed, search for Id and delete
+//return all items in database-- if a queryId is passed, search for Id and DELETE
+//delete function was not working
+//sqlite PDO does not allow for variable injection on column names therefore switch statement is used
 $app->get('/items', function (Request $req, Response $res) use ($db, $app) {
-    $query = $req->getUri()->getQuery();
+    $query = $req->getQueryParams();
+    $delete = $query['delete'];
+    $order = $query['orderBy'];
 
-    if (!$query){
-      $stmt = $db->query('SELECT * FROM items;');
+    if (!$delete){
+      switch ($order) {
+      	case 'id':
+          $stmt = $db->query("SELECT * FROM items");
+          break;
+        case 'name':
+          $stmt = $db->query("SELECT * FROM items ORDER BY name");
+          break;
+        case 'model':
+          $stmt = $db->query("SELECT * FROM items ORDER BY model");
+          break;
+        case 'mac_address':
+          $stmt = $db->query("SELECT * FROM items ORDER BY mac_address");
+          break;
+      }
+
       echo json_encode($stmt->fetchAll(PDO::FETCH_CLASS));
     } else {
     	$sql = 'DELETE FROM items ' . 'WHERE id =:id';
     	$stmt = $db->prepare($sql);
-    	$stmt->bindValue(':id', $query);
+    	$stmt->bindValue(':id', $delete);
     	if ($stmt->execute()) {
-        returnResult('Delete', true, $query);
+        returnResult('Delete', true, $delete);
       } else {
-      	returnResult('Delete', false, $query);
+      	returnResult('Delete', false, $delete);
       }
   
     }
@@ -64,7 +82,6 @@ $app->post('/items', function (Request $req, Response $res) use ($db, $app) {
     returnResult('add', $qry == true, $db->lastInsertId());
 
 });
-
 
 
 
