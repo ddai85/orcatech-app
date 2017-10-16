@@ -18,14 +18,13 @@ Performance may be slow due to servers being a free service
 #Technology Stack
  - ReactJS (Front end)
  - PHP with Slim PHP Library (Server)
- - SQLITE with PDO (Database)
+ - MYSQL (JawsDB free remote service)
  - Materialize-CSS (Styling)
 
 
 #Directions to run development version of the app
- - Place wwwroot folder into directory accessible by Apache server
+ - Clone repo directory to somewhere accessible by Apache server
  - Install NPM and Composer dependency package managers
- - Run 'npm install' inside wwwroot directory
- - Run 'php composer.phar install' inside wwwroot directory
- - Confirm that /database/api_db.db directory and file are both Read/Write access to http requests (or everyone)
- - Open App by directing browser to localhost (or whereever Apache is set up to run)
+ - Run 'npm install' inside root directory
+ - Run 'php composer.phar install' inside root directory
+ - Open App by directing browser to localhost (or wherever Apache is set up to run)
