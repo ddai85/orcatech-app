@@ -15,7 +15,8 @@ A quick app made for ORCATECH job application
 #Technology Stack
  - ReactJS (Front end)
  - PHP with Slim PHP Library (Server)
- - SQLITE with PDO (Database)
+ - SQLITE with PDO (Database) - github version (easier for local setup/installation)
+ - MYSQL on deployed website
  - Materialize-CSS (Styling)
 
 
