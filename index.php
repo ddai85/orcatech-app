@@ -6,8 +6,23 @@ include_once './database/config.php';
 require './vendor/autoload.php';
 
 $app = new \Slim\App;
+// Get container
+$container = $app->getContainer();
+
+// Register component on container
+$container['view'] = function ($container) {
+    return new \Slim\Views\PhpRenderer('/');
+};
+
 $database = new Database();
 $db = $database->getConnection();
+
+// Render PHP template in route
+$app->get('/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.html', [
+        'name' => $args['name']
+    ]);
+})->setName('index');
 
 function getTitleFromUrl($url)
 {
