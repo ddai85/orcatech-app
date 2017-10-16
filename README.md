@@ -1,6 +1,9 @@
 # orcatech-app
 A quick app made for ORCATECH job application
 
+A fully deployed version of the app is available at: https://orcatech-app.herokuapp.com/
+Performance may be slow due to servers being a free service
+
 #User Requirements:
  - Display, Add and remove items in a table using ReactJS, WebPack and PHP
  - The table should have:
