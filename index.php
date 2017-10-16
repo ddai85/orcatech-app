@@ -10,7 +10,7 @@ $app = new \Slim\App;
 $container = $app->getContainer();
 
 // Register component on container
-$container['renderer'] = new PhpRenderer("/");
+$container['renderer'] = new PhpRenderer("./client/dist");
 
 $database = new Database();
 $db = $database->getConnection();
